@@ -29,13 +29,13 @@ int main(void) {
         printf("6. Exit\n");
         printf("Enter your choice: ");
         if (scanf("%d", &choice) != 1) {
-            /* clear invalid input */
+        
             int ch;
             while ((ch = getchar()) != '\n' && ch != EOF) { }
             printf("Please enter a number between 1 and 6.\n");
             continue;
         }
-        getchar(); /* clear newline */
+        getchar(); 
 
         switch (choice) {
             case 1: addContact(); break;
@@ -64,13 +64,11 @@ void addContact(void) {
     if (fgets(c.name, sizeof(c.name), stdin) == NULL) return;
     c.name[strcspn(c.name, "\n")] = '\0';
 
-    /* Phone number must be exactly 10 digits */
     while (1) {
         printf("Enter Phone Number (10 digits): ");
         if (fgets(c.phone, sizeof(c.phone), stdin) == NULL) return;
         c.phone[strcspn(c.phone, "\n")] = '\0';
 
-        /* Check length exactly 10 and all digits */
         int len = strlen(c.phone);
         int all_digits = 1;
         if (len != 10) all_digits = 0;
@@ -190,7 +188,6 @@ void deleteContact(void) {
     fclose(fp);
     fclose(temp);
 
-    /* Replace original file with temp file */
     remove("contacts.txt");
     rename("temp.txt", "contacts.txt");
 
@@ -233,12 +230,10 @@ void updateContact(void) {
 
             printf("Enter New Name: ");
             if (fgets(c.name, sizeof(c.name), stdin) == NULL) {
-                /* keep old if input fails */
+                
             } else {
                 c.name[strcspn(c.name, "\n")] = '\0';
             }
-
-            /* Phone number validation */
             while (1) {
                 printf("Enter New Phone Number (10 digits): ");
                 if (fgets(c.phone, sizeof(c.phone), stdin) == NULL) break;
@@ -262,7 +257,7 @@ void updateContact(void) {
 
             printf("Enter New Email: ");
             if (fgets(c.email, sizeof(c.email), stdin) == NULL) {
-                /* keep old if input fails */
+            
             } else {
                 c.email[strcspn(c.email, "\n")] = '\0';
             }
